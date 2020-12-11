@@ -1,3 +1,5 @@
+# https://github.com/Squaregentleman/mimotion
+
 # 小米运动自动刷步数
 
 > 小米运动自动刷步数

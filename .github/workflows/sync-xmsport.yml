@@ -1,0 +1,29 @@
+# File: .github/workflows/repo-sync.yml
+name: sync-wintjade-xm_steps
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+  watch:
+    types: started
+  repository_dispatch:
+    types: sync-wintjade-xm_steps
+jobs:
+  repo-sync:
+    env:
+      PAT: ${{ secrets.PAT || github.event.client_payload.PAT }}
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: sync sync-wintjade-xm_steps
+        uses: repo-sync/github-sync@v2
+        if: env.PAT
+        with:
+          source_repo: "https://github.com/wintjade/xm_steps.git"
+          source_branch: "main"
+          destination_branch: "main"
+          github_token: ${{ secrets.PAT || github.event.client_payload.PAT }}

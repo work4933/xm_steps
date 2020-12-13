@@ -2,10 +2,6 @@ name: xmSports
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
   schedule:
     - cron: '0 10 * * *'
   watch:
@@ -23,7 +19,7 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
-    - name: 'Install requirements'
+    - name: 'Start'
       run: |
         pip install requests
         sckey='${{ secrets.SCKEY }}'

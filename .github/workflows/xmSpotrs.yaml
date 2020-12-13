@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-    - cron: 0 12 * * *
+    - cron: '0 10 * * *'
   watch:
     types: started
   repository_dispatch:
@@ -19,11 +19,11 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
     - uses: actions/checkout@v2
-    - name: 初始化Python
+    - name: 'Set up Python'
       uses: actions/setup-python@v2
       with:
-        python-version: 3.7
-    - name: 开始
+        python-version: 3.8
+    - name: 'Install requirements'
       run: |
         pip install requests
         sckey='${{ secrets.SCKEY }}'
